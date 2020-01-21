@@ -240,6 +240,16 @@ Expr PowerExpression::parseLogicalExpr()
 			//构造for循环节点
 			return Expr::newFor(init, cond, update, body);
 		}
+		//break语句
+		else if (word == "break")
+		{
+			return Expr::newBreak();
+		}
+		//continue语句
+		else if (word == "continue")
+		{
+		return Expr::newContinue();
+ }
 	}
 
 	Expr res = parseCmpexpr();

@@ -3,7 +3,7 @@
 using namespace std;
 
 string Token::typeDesc[18] = { "Integer", "Float", "ArithOp", "LogicalOp", "LeftParenthesis", "RightParenthesis", "LeftBracket", "RightBracket", "LeftBrace", "RightBrace", "Identifier", "Comma", "Semicolon", "Assign", "Keyword", "Conjunc", "End", "Unknown" };
-string Token::keyword[4] = { "if", "else", "while", "for" };
+string Token::keyword[6] = { "if", "else", "while", "for", "break", "continue" };
 
 string Token::toString() const
 {

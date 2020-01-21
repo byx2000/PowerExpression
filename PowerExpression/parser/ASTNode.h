@@ -91,6 +91,8 @@ public:
 	static Expr newWhile(const Expr& cond, const Expr& body);
 	static Expr newIf(const Expr& cond, const Expr& tExpr, const Expr& fExpr);
 	static Expr newFor(const Expr& init, const Expr& cond, const Expr& update, const Expr& body);
+	static Expr newBreak();
+	static Expr newContinue();
 	
 	std::string toString() const { return p->toString(); }
 	double eval(Environment& env) const { return p->eval(env); }
@@ -283,4 +285,32 @@ class ForNode : public ASTNode
 
 	Expr init, cond, update;
 	Expr body;
+};
+
+/*break”Ôæ‰*/
+class BreakNode : public ASTNode
+{
+	friend class Expr;
+
+	BreakNode() {}
+	std::string toString() const { return "break"; }
+	double eval(Environment& env) const
+	{
+		throw std::string("break");
+		return 0;
+	}
+};
+
+/*continue”Ôæ‰*/
+class ContinueNode : public ASTNode
+{
+	friend class Expr;
+
+	ContinueNode() {}
+	std::string toString() const { return "continue"; }
+	double eval(Environment& env) const
+	{
+		throw std::string("continue");
+		return 0;
+	}
 };

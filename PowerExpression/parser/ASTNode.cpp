@@ -14,7 +14,7 @@ string NumNode::toString() const
 
 Expr::Expr()
 {
-	p = new EmptyNode();;
+	p = new EmptyNode();
 }
 
 Expr Expr::operator=(const Expr & expr)
@@ -57,6 +57,16 @@ Expr Expr::newWhile(const Expr & cond, const Expr & body) { return Expr(new Whil
 Expr Expr::newIf(const Expr & cond, const Expr & tExpr, const Expr & fExpr) { return Expr(new IfNode(cond, tExpr, fExpr)); }
 
 Expr Expr::newFor(const Expr & init, const Expr & cond, const Expr & update, const Expr & body) { return Expr(new ForNode(init, cond, update, body)); }
+
+Expr Expr::newBreak()
+{
+	return Expr(new BreakNode());
+}
+
+Expr Expr::newContinue()
+{
+	return Expr(new ContinueNode());
+}
 
 string BinaryOpNode::name[14] = { "+", "-", "*", "/", "^", "%", "==", "!=", "<", ">", "<=", ">=", "&&", "||" };
 
@@ -281,7 +291,21 @@ double WhileNode::eval(Environment& env) const
 	double res = 0.0;
 	while (!equal(cond.eval(env), 0.0))
 	{
-		res = body.eval(env);
+		try
+		{
+			res = body.eval(env);
+		}
+		catch (string& str)
+		{
+			if (str == "break")
+			{
+				break;
+			}
+			else if (str == "continue")
+			{
+				continue;
+			}
+		}
 	}
 	return res;
 }

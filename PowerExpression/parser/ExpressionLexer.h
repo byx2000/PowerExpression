@@ -10,7 +10,7 @@ class Token
 public:
 	enum Type { Integer, Float, ArithOp, LogicalOp, LeftParenthesis, RightParenthesis, LeftBracket, RightBracket, LeftBrace, RightBrace, Identifier, Comma, Semicolon, Assign, Keyword, Conjunc, End, Unknown };
 	static std::string typeDesc[18];
-	static std::string keyword[4];
+	static std::string keyword[6];
 
 	Token(const std::string& name = "", Type type = Unknown) : _name(name), _type(type) {}
 
